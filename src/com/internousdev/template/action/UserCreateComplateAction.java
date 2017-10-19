@@ -16,19 +16,20 @@ public class UserCreateComplateAction extends ActionSupport implements SessionAw
 
 	public String userName;
 
-	public Map<String,Object> createUserSession;
+	public Map<String,Object> session;
 
 	public String result;
 
-	public SessionAware session = new UserCreateConfirmAction();
-
 	public UserCreateComplateDAO userCreateComplateDAO = new UserCreateComplateDAO();
 
+	/**
+	 * ユーザー情報登録処理
+	 */
 	public String execute() throws SQLException {
 
-		userCreateComplateDAO.cerateUser(createUserSession.get("loginUserId").toString(),
-				createUserSession.get("loginPassword").toString(),
-				createUserSession.get("userName").toString());
+		userCreateComplateDAO.cerateUser(session.get("loginUserId").toString(),
+				session.get("loginPassword").toString(),
+				session.get("userName").toString());
 
 		result = SUCCESS;
 
@@ -60,7 +61,7 @@ public class UserCreateComplateAction extends ActionSupport implements SessionAw
 	}
 
 	@Override
-	public void setSession(Map<String, Object> createUserSession) {
-		this.createUserSession = createUserSession;
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
 	}
 }

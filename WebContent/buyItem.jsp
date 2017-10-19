@@ -76,7 +76,7 @@
 						<span>商品名</span>
 					</td>
 					<td>
-						<s:property value="loginUserInfoMap.buyItem_name" /><br>
+						<s:property value="session.buyItem_name" />
 					</td>
 				</tr>
 				<tr>
@@ -84,15 +84,15 @@
 						<span>値段</span>
 					</td>
 					<td>
-						<s:property value="loginUserInfoMap.buyItem_price" /><span>円</span>
+						<s:property value="session.buyItem_price" /><span>円</span>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<span>購入個数</span>
+						<span>在庫</span>
 					</td>
 					<td>
-						<select name="count">
+						<select name="stock">
 							<option value="1" selected="selected">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
@@ -118,8 +118,7 @@
 			</table>
 		</s:form>
 			<div>
-				<p>前画面に戻る場合は<a href='<s:url action="GoHomeAction" />'>こちら</a></p>
-				<p>マイぺージは<a href='<s:url action="MyPageAction" />'>こちら</a></p>
+				<span>前画面に戻る場合は</span><a href='<s:url action="HomeAction" />'>こちら</a>
 			</div>
 		</div>
 	</div>

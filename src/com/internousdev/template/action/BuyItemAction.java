@@ -1,7 +1,5 @@
-
 package com.internousdev.template.action;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
@@ -19,7 +17,7 @@ public class BuyItemAction extends ActionSupport implements SessionAware {
 	/**
 	 * アイテム購入個数
 	 */
-	public int count;
+	public int stock;
 
 	/**
 	 * 支払い方法
@@ -29,7 +27,7 @@ public class BuyItemAction extends ActionSupport implements SessionAware {
 	/**
 	 * アイテム情報を格納
 	 */
-	public Map<String, Object>  buyItemInfoMap = new HashMap<>();
+	public Map<String, Object>  session;
 
 	/**
 	 * 処理結果
@@ -43,31 +41,32 @@ public class BuyItemAction extends ActionSupport implements SessionAware {
 	 */
 	public String execute() {
 		result = SUCCESS;
-		buyItemInfoMap.put("count", count);
-		int intCount = Integer.parseInt(buyItemInfoMap.get("count").toString());
-		int intPrice = Integer.parseInt(buyItemInfoMap.get("buyItem_price").toString());
 
-		buyItemInfoMap.put("total_price", intCount * intPrice);
+		session.put("stock", stock);
+		int intStock = Integer.parseInt(session.get("stock").toString());
+		int intPrice = Integer.parseInt(session.get("buyItem_price").toString());
+
+		session.put("buyItem_price", intStock * intPrice);
 		String payment;
 
 		if(pay.equals("1")) {
 
 			payment = "現金払い";
-			buyItemInfoMap.put("pay", payment);
+			session.put("pay", payment);
 		} else {
 
 			payment = "クレジットカード";
-			buyItemInfoMap.put("pay", payment);
+			session.put("pay", payment);
 		}
 		return result;
 	}
 
-	public int getCount() {
-		return count;
+	public int getStock() {
+		return stock;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
 	public String getPay() {
@@ -79,7 +78,7 @@ public class BuyItemAction extends ActionSupport implements SessionAware {
 	}
 
 	@Override
-	public void setSession(Map<String, Object> buyItemInfoMap) {
-		this.buyItemInfoMap = buyItemInfoMap;
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
 	}
 }
